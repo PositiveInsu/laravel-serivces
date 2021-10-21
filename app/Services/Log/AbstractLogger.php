@@ -18,6 +18,7 @@ abstract class AbstractLogger implements LoggerInterface
 
     public function __construct(
         protected ExceptionServiceInterface $exceptionService,
+        protected LoggerStatusInterface $loggerStatus
     ){
         $this->delimiter = config('custom_log.delimiter');
         $this->format = config('custom_log.formatter_format');
@@ -27,17 +28,26 @@ abstract class AbstractLogger implements LoggerInterface
 
     public function INFO(LogDataInterface $logData): void
     {
-        $this->checkLogDataType($logData);
-        $logMessage = $this->getMessageFrom($logData);
-        $this->logger->info($logMessage);
-        $this->logger->reset();
+        if( $this->loggerStatus->getINFOStatus()){
+            $this->checkLogDataType($logData);
+            $logMessage = $this->getMessageFrom($logData);
+            $this->logger->info($logMessage);
+            $this->logger->reset();
+        }
     }
 
-    public function DEBUG(LogDataInterface $logData): void
+    public function ERROR(LogDataInterface $logData): void
     {
-        $this->checkLogDataType($logData, MigrationLogData::class);
-        $this->logError($logData);
-        $this->logTrace($logData);
+        if( $this->loggerStatus->getERRORStatus()){
+            $this->checkLogDataType($logData, MigrationLogData::class);
+            $this->logError($logData);
+            $this->logTrace($logData);
+        }
+    }
+
+    public function getLoggerStatus(): LoggerStatusInterface
+    {
+        return $this->loggerStatus;
     }
 
     private function logError(LogDataInterface $logData)
@@ -58,7 +68,7 @@ abstract class AbstractLogger implements LoggerInterface
      * @internal Define log file name in the method manually
      * @return string
      */
-    protected abstract function getLogFileName(): string;
+    public abstract function getLogFileName(): string;
     protected abstract function checkLogDataType(LogDataInterface $logData): void;
     protected abstract function getMessageFrom(LogDataInterface $logData): string;
     protected abstract function getTraceMessageFrom(LogDataInterface $logData): string;

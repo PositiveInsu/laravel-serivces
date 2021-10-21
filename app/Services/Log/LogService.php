@@ -7,9 +7,13 @@ use App\Services\Log\Migration\MigrationLoggerInterface;
 
 class LogService
 {
+    private array $loggerList = [];
+
     public function __construct(
         private MigrationLoggerInterface $migrationLogger,
-    ) {}
+    ) {
+        $this->loggerList[$this->migrationLogger->getLogFileName()] = $this->migrationLogger;
+    }
 
     /**
      * @return LogBuilderInterface
@@ -22,5 +26,13 @@ class LogService
     public function getEventName(string $className, string $functionName): string
     {
         return $className.'->'.$functionName;
+    }
+
+    /**
+     * @return array
+     */
+    public function getLoggerList(): array
+    {
+        return $this->loggerList;
     }
 }

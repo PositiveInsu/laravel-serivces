@@ -2,7 +2,9 @@
 
 namespace App\Services\Log\Migration;
 
-interface MigrationLoggerInterface
+use App\Services\Log\LoggerInterface;
+
+interface MigrationLoggerInterface extends LoggerInterface
 {
 
 }

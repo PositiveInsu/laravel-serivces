@@ -7,7 +7,7 @@ use App\Services\Log\LogDataInterface;
 
 class MigrationLogger extends AbstractLogger implements MigrationLoggerInterface
 {
-    protected function getLogFileName(): string
+    public function getLogFileName(): string
     {
         return "Migration";
     }

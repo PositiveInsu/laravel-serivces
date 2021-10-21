@@ -16,9 +16,9 @@ abstract class AbstractLogBuilder implements LogBuilderInterface
         $this->logger->INFO($logData);
     }
 
-    public function DEBUG(): void{
+    public function ERROR(): void{
         $logData = $this->getLogData();
-        $this->logger->DEBUG($logData);
+        $this->logger->ERROR($logData);
     }
 
     protected abstract function getLogData(): LogDataInterface;

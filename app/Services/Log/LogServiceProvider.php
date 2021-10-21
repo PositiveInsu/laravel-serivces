@@ -12,7 +12,9 @@ class LogServiceProvider extends ServiceProvider
     {
         $this->setConfig();
 
+        $this->app->bind(LoggerStatusInterface::class, LoggerStatus::class);
         $this->app->singleton(MigrationLoggerInterface::class, MigrationLogger::class);
+        $this->app->bind(LogService::class, LogService::class);
     }
 
     private function setConfig()

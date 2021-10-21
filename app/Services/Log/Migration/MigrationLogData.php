@@ -7,11 +7,13 @@ use App\Services\Log\AbstractLogData;
 class MigrationLogData extends AbstractLogData
 {
     private string $workingTable;
+    private array $data;
 
     public function __construct(string $workingTable, string $contextId, string $event, string $message, string $trace, array $data)
     {
         $this->workingTable = $workingTable;
-        parent::__construct($contextId, $event, $message, $trace, $data);
+        $this->data = $data;
+        parent::__construct($contextId, $event, $message, $trace);
     }
 
     /**
@@ -20,5 +22,13 @@ class MigrationLogData extends AbstractLogData
     public function getWorkingTable(): string
     {
         return $this->workingTable;
+    }
+
+    /**
+     * @return array
+     */
+    public function getData(): array
+    {
+        return $this->data;
     }
 }

@@ -8,22 +8,19 @@ abstract class AbstractLogData implements LogDataInterface
     protected string $event;
     protected string $message;
     protected string $trace;
-    protected array $data;
 
     /**
      * @param string $contextId
      * @param string $event
      * @param string $message
      * @param string $trace
-     * @param array $data
      */
-    public function __construct(string $contextId, string $event, string $message, string $trace, array $data)
+    public function __construct(string $contextId, string $event, string $message, string $trace)
     {
         $this->contextId = $contextId;
         $this->event = $event;
         $this->message = $message;
         $this->trace = $trace;
-        $this->data = $data;
     }
 
     /**
@@ -56,13 +53,5 @@ abstract class AbstractLogData implements LogDataInterface
     public function getTrace(): string
     {
         return $this->trace;
-    }
-
-    /**
-     * @return array
-     */
-    public function getData(): array
-    {
-        return $this->data;
     }
 }
