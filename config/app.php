@@ -175,6 +175,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+        * Custom Providers...
+        */
+        App\Services\Exception\ExceptionServiceProvider::class,
+        App\Services\Log\LogServiceProvider::class,
     ],
 
     /*
