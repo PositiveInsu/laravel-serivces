@@ -178,8 +178,9 @@ return [
         /*
         * Custom Providers...
         */
-        App\Services\Exception\ExceptionServiceProvider::class,
-        App\Services\Log\LogServiceProvider::class,
+        Library\Exception\ExceptionServiceProvider::class,
+        Library\Log\LogServiceProvider::class,
+        App\Providers\TestProvider::class,
     ],
 
     /*

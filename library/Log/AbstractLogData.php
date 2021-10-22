@@ -1,7 +1,12 @@
 <?php
 
-namespace App\Services\Log;
+namespace Library\Log;
 
+/*
+ * If you implement AbstractLogData, please define your own variables what you need in your implemented class .
+ * Furthermore, just define the getter method in that class, not setter.
+ * Setter will be placed on the LogBuilder Class.
+ */
 abstract class AbstractLogData implements LogDataInterface
 {
     protected string $contextId;

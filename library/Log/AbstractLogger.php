@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Services\Log;
+namespace Library\Log;
 
-use App\Services\Exception\ExceptionServiceInterface;
-use App\Services\Log\Migration\MigrationLogData;
+use Library\Exception\ExceptionServiceInterface;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -39,7 +38,7 @@ abstract class AbstractLogger implements LoggerInterface
     public function ERROR(LogDataInterface $logData): void
     {
         if( $this->loggerStatus->getERRORStatus()){
-            $this->checkLogDataType($logData, MigrationLogData::class);
+            $this->checkLogDataType($logData);
             $this->logError($logData);
             $this->logTrace($logData);
         }

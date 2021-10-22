@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Exception;
+namespace Library\Exception;
 
 use InvalidArgumentException;
 use RuntimeException;

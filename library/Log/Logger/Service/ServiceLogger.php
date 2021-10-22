@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Services\Log\Migration;
+namespace Library\Log\Logger\Service;
 
-use App\Services\Log\AbstractLogger;
-use App\Services\Log\LogDataInterface;
+use Library\Log\AbstractLogger;
+use Library\Log\LogDataInterface;
 
-class MigrationLogger extends AbstractLogger implements MigrationLoggerInterface
+class ServiceLogger extends AbstractLogger implements ServiceLoggerInterface
 {
     public function getLogFileName(): string
     {
-        return "Migration";
+        return "Service";
     }
 
     protected function checkLogDataType(LogDataInterface $logData): void
     {
-        if(!is_a($logData, MigrationLogData::class)){
-            $this->exceptionService->invalidArgument(MigrationLogData::class, $logData::class);
+        if(!is_a($logData, ServiceLogData::class)){
+            $this->exceptionService->invalidArgument(ServiceLogData::class, $logData::class);
         }
     }
 
@@ -23,8 +23,8 @@ class MigrationLogger extends AbstractLogger implements MigrationLoggerInterface
     {
         $logData = $this->castType($logData);
         return $logData->getContextId().$this->delimiter.
+            $logData->getUserID().$this->delimiter.
             $logData->getEvent().$this->delimiter.
-            $logData->getWorkingTable().$this->delimiter.
             $logData->getMessage();
     }
 
@@ -32,11 +32,10 @@ class MigrationLogger extends AbstractLogger implements MigrationLoggerInterface
     {
         $logData = $this->castType($logData);
         return $logData->getContextId().$this->delimiter.
-            json_encode($logData->getData()).$this->delimiter.
             $logData->getTrace();
     }
 
-    private function castType(MigrationLogData $logData): MigrationLogData
+    private function castType(ServiceLogData $logData): ServiceLogData
     {
         return $logData;
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Log;
+namespace Library\Log;
 
 class LoggerStatus implements LoggerStatusInterface
 {

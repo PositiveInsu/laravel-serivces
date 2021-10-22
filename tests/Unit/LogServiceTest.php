@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use App\Services\Log\LogService;
 use Illuminate\Container\Container;
+use Library\Log\LogService;
 use Tests\TestCase;
 
 class LogServiceTest extends TestCase
