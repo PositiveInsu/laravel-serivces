@@ -9,8 +9,8 @@ class LoggerStatus implements LoggerStatusInterface
 
     public function __construct()
     {
-        $this->ERROR = config('custom_log.error_status');
-        $this->INFO = config( 'custom_log.info_status');
+        $this->ERROR = true;
+        $this->INFO = true;
     }
 
     public function getERRORStatus(): bool
@@ -21,27 +21,5 @@ class LoggerStatus implements LoggerStatusInterface
     public function getINFOStatus(): bool
     {
         return $this->INFO;
-    }
-
-    public function setErrorStatus(bool $status): void
-    {
-        $this->ERROR = $status;
-    }
-
-    public function setINFOStatus(bool $status): void
-    {
-        $this->INFO = $status;
-    }
-
-    public function allOn(): void
-    {
-        $this->INFO = true;
-        $this->ERROR = true;
-    }
-
-    public function allOff(): void
-    {
-        $this->INFO = false;
-        $this->ERROR = false;
     }
 }
