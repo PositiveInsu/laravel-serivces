@@ -2,13 +2,15 @@
 
 namespace Library\Log;
 
+use Illuminate\Container\Container;
 use Library\Log\Logger\Service\ServiceLogBuilder;
 
 abstract class AbstractLogService
 {
-    public function __construct(
-        private ServiceLogBuilder $serviceLogBuilder
-    ){}
+    private ServiceLogBuilder $serviceLogBuilder;
+    public function __construct(){
+        $this->serviceLogBuilder = Container::getInstance()->make(ServiceLogBuilder::class);
+    }
 
     /**
      * @return ServiceLogBuilder

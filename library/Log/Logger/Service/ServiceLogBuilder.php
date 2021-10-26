@@ -12,9 +12,10 @@ class ServiceLogBuilder extends AbstractLogBuilder
     /**
      * @param string $userID
      */
-    public function setUserID(string $userID): void
+    public function setUserID(string $userID): ServiceLogBuilder
     {
         $this->userID = $userID;
+        return $this;
     }
 
 

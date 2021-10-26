@@ -1,6 +1,6 @@
 <?php
 
-namespace Library\Log;
+namespace Library\Log\Logger;
 
 use Library\Exception\ExceptionServiceInterface;
 use Monolog\Formatter\LineFormatter;

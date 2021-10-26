@@ -2,23 +2,23 @@
 
 namespace Library\Exception;
 
-use InvalidArgumentException;
-use RuntimeException;
-
 abstract class AbstractExceptionService implements ExceptionServiceInterface
 {
-    private string $MESSAGE_NULL_VALUE = "The argument must be not a null value.. Your argument is null.";
+    /*
+     * Default Messages.
+     */
+    private string $MESSAGE_NULL_VALUE = "The argument must not be a null value.. Your argument is null.";
     private string $MESSAGE_INVALID_ARGUMENT = " is a expected type, but the argument is not matched. Your argument is ";
 
-    public function common(string $message): void
+    public function runtime(string $message, bool $report = false): void
     {
-        throw new RuntimeException($message);
+        throw new CustomRuntimeException($message, $report);
     }
 
-    public function nullValue(?string $message = null): void
+    public function nullValueParameter(?string $message = null): void
     {
         $message = $this->changeMessageIfNull($message, $this->MESSAGE_NULL_VALUE);
-        throw new RuntimeException($message);
+        throw new CustomRuntimeException($message);
     }
 
     public function invalidArgument(string $expectType, string $valueType, ?string $message = null): void
@@ -26,7 +26,7 @@ abstract class AbstractExceptionService implements ExceptionServiceInterface
         // TODO: [IJ] Design how to use debug_backtrace for exception
         debug_backtrace();
         $message = $this->changeMessageIfNull($message, $expectType.$this->MESSAGE_INVALID_ARGUMENT.$valueType);
-        throw new InvalidArgumentException($message);
+        throw new CustomRuntimeException($message);
     }
 
     private function changeMessageIfNull(?string $message, string $alternativeMessage): string

@@ -1,6 +1,6 @@
 <?php
 
-namespace Library\Log;
+namespace Library\Log\Logger;
 
 /*
  * If you implement AbstractLogData, please define your own variables what you need in your implemented class .

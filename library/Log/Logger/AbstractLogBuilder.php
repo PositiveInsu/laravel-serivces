@@ -1,6 +1,6 @@
 <?php
 
-namespace Library\Log;
+namespace Library\Log\Logger;
 
 /*
  * If you implement AbstractLogBuilder, please define your variables what you made in your LogData Class in your LogBuilder implemented class .
@@ -8,6 +8,7 @@ namespace Library\Log;
  * And return your LogData class in the getLogData() method.
  *
  */
+
 abstract class AbstractLogBuilder implements LogBuilderInterface
 {
     protected LoggerInterface $logger;

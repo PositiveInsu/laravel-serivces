@@ -13,9 +13,10 @@ class MigrationLogBuilder extends AbstractLogBuilder
     /**
      * @param string $migratorID
      */
-    public function setMigratorID(string $migratorID): void
+    public function setMigratorID(string $migratorID): MigrationLogBuilder
     {
         $this->migratorID = $migratorID;
+        return $this;
     }
 
     protected function getLogData(): LogDataInterface
