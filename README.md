@@ -2,20 +2,29 @@
 
 Custom Services for laravel
 
+### Setup
+Insert Library namespace to the composer.json
+
+> "autoload": {
+>     "psr-4": {
+>         "Library\\": "library/",
+>     }
+> }
+
 ## Exception Service
 
 ### Setup
 
 Insert provider to the providers array in the /config/app.php
 
-> 'providers' => [ App\Services\Exception\ExceptionServiceProvider::class ]
+> 'providers' => [ Library\Exception\ExceptionServiceProvider::class ]
 
 ## Log Service
 
 ### Setup
 
 Insert provider to the providers array in the /config/app.php
-> 'providers' => [ App\Services\Log\LogServiceProvider::class ]
+> 'providers' => [ Library\Log\LogServiceProvider::class ]
 
 ### Config file
 
