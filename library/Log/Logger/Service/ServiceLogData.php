@@ -2,8 +2,7 @@
 
 namespace Library\Log\Logger\Service;
 
-
-use Library\Log\AbstractLogData;
+use Library\Log\Logger\AbstractLogData;
 
 class ServiceLogData extends AbstractLogData
 {

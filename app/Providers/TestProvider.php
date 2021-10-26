@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Service\Log\Logger\MigrationLogBuilder;
 use App\Service\Log\Logger\MigrationLogger;
 use App\Service\Log\Logger\MigrationLoggerInterface;
+use App\Service\Log\TSMLogService;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class TestProvider extends ServiceProvider
@@ -16,5 +17,7 @@ class TestProvider extends ServiceProvider
         $this->app->bind(MigrationLogBuilder::class, function($app){
             return new MigrationLogBuilder($app->make(MigrationLoggerInterface::class));
         });
+
+        $this->app->bind(TSMLogService::class, TSMLogService::class);
     }
 }

@@ -3,6 +3,8 @@
 namespace Library\Log;
 
 use Illuminate\Support\ServiceProvider;
+use Library\Log\Logger\LoggerStatus;
+use Library\Log\Logger\LoggerStatusInterface;
 use Library\Log\Logger\Service\ServiceLogBuilder;
 use Library\Log\Logger\Service\ServiceLogger;
 use Library\Log\Logger\Service\ServiceLoggerInterface;
@@ -19,8 +21,6 @@ class LogServiceProvider extends ServiceProvider
         $this->app->bind(ServiceLogBuilder::class, function($app){
             return new ServiceLogBuilder($app->make(ServiceLoggerInterface::class));
         });
-
-        $this->app->bind(AbstractLogService::class, LogService::class);
     }
 
     private function setConfig()

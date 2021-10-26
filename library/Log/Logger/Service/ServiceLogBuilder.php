@@ -2,8 +2,8 @@
 
 namespace Library\Log\Logger\Service;
 
-use Library\Log\AbstractLogBuilder;
-use Library\Log\LogDataInterface;
+use Library\Log\Logger\AbstractLogBuilder;
+use Library\Log\Logger\LogDataInterface;
 
 class ServiceLogBuilder extends AbstractLogBuilder
 {
