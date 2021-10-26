@@ -75,12 +75,16 @@ abstract class AbstractLogger implements LoggerInterface
     private function initLogger(string $loggerName)
     {
         $logger = new Logger($loggerName);
-        $logger->pushHandler($this->setFormatter(new StreamHandler(base_path().'/logs/'.$loggerName.'/'.$loggerName.'.log', Logger::INFO)));
-        $logger->pushHandler($this->setFormatter(new StreamHandler(base_path().'/logs/'.$loggerName.'/'.$loggerName.'_error.log', Logger::ERROR)));
+        $logger->pushHandler($this->setFormatter(new StreamHandler($this->getLogPath($loggerName).$loggerName.'.log', Logger::INFO)));
+        $logger->pushHandler($this->setFormatter(new StreamHandler($this->getLogPath($loggerName).$loggerName.'_error.log', Logger::ERROR)));
+        $handler = new StreamHandler(
+            $config['log_base_path'] ?? $this->app->storagePath().'/logs/laravel.log',
+            $this->level(['level' => 'debug'])
+        );
         $this->logger = $logger;
 
         $traceLogger = new Logger($loggerName);
-        $traceLogger->pushHandler($this->setFormatter(new StreamHandler(base_path().'/logs/'.$loggerName.'/'.$loggerName.'_error_trace.log', Logger::ERROR)));
+        $traceLogger->pushHandler($this->setFormatter(new StreamHandler($this->getLogPath($loggerName).$loggerName.'_error_trace.log', Logger::ERROR)));
         $this->traceLogger = $traceLogger;
     }
 
@@ -90,5 +94,10 @@ abstract class AbstractLogger implements LoggerInterface
         $formatter->includeStacktraces(true);
         $handler->setFormatter($formatter);
         return $handler;
+    }
+
+    private function getLogPath(string $loggerName): string
+    {
+        return $config['log_base_path'] ?? $this->app->storagePath().'/logs/'.$loggerName.'/';
     }
 }
