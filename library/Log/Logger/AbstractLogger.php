@@ -77,10 +77,6 @@ abstract class AbstractLogger implements LoggerInterface
         $logger = new Logger($loggerName);
         $logger->pushHandler($this->setFormatter(new StreamHandler($this->getLogPath($loggerName).$loggerName.'.log', Logger::INFO)));
         $logger->pushHandler($this->setFormatter(new StreamHandler($this->getLogPath($loggerName).$loggerName.'_error.log', Logger::ERROR)));
-        $handler = new StreamHandler(
-            $config['log_base_path'] ?? $this->app->storagePath().'/logs/laravel.log',
-            $this->level(['level' => 'debug'])
-        );
         $this->logger = $logger;
 
         $traceLogger = new Logger($loggerName);
