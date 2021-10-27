@@ -27,9 +27,7 @@ Insert provider to the providers array in the /config/app.php
 > 'providers' => [ Library\Log\LogServiceProvider::class ]
 2. Make the CustomLogService on your own with extending AbstractLogService class.
 > class TSMLogService extends AbstractLogService
-3. Add CustomLogService bind code to your custom provider.
-> $this->app->bind(TSMLogService::class, TSMLogService::class);
 
-### Config file
+### Config file for Log Service
 
 `config.php` is In the Services\Log\Config folder. 
