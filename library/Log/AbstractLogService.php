@@ -20,7 +20,7 @@ abstract class AbstractLogService
         return $this->serviceLogBuilder;
     }
 
-    public function getEventNameFromClassAndFunction(string $className, string $functionName): string
+    public function getEventNameFrom(string $className, string $functionName): string
     {
         return $className.'->'.$functionName;
     }
