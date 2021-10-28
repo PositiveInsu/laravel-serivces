@@ -8,7 +8,6 @@ namespace Library\Log\Logger;
  * And return your LogData class in the getLogData() method.
  *
  */
-
 abstract class AbstractLogBuilder implements LogBuilderInterface
 {
     protected LoggerInterface $logger;

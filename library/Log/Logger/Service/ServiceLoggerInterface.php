@@ -2,7 +2,7 @@
 
 namespace Library\Log\Logger\Service;
 
-use Library\Log\LoggerInterface;
+use Library\Log\Logger\LoggerInterface;
 
 interface ServiceLoggerInterface extends LoggerInterface
 {

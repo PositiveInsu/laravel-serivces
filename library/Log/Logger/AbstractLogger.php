@@ -94,6 +94,6 @@ abstract class AbstractLogger implements LoggerInterface
 
     private function getLogPath(string $loggerName): string
     {
-        return $config['log_base_path'] ?? $this->app->storagePath().'/logs/'.$loggerName.'/';
+        return $config['log_base_path'] ?? storage_path().'/logs/'.$loggerName.'/';
     }
 }

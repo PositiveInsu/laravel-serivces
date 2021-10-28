@@ -2,8 +2,9 @@
 
 namespace Library\Log\Logger\Service;
 
-use Library\Log\AbstractLogger;
-use Library\Log\LogDataInterface;
+
+use Library\Log\Logger\AbstractLogger;
+use Library\Log\Logger\LogDataInterface;
 
 class ServiceLogger extends AbstractLogger implements ServiceLoggerInterface
 {
