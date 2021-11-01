@@ -2,8 +2,8 @@
 
 namespace App\Service\Log\Logger;
 
-use Library\Log\AbstractLogger;
-use Library\Log\LogDataInterface;
+use Library\Log\Logger\AbstractLogger;
+use Library\Log\Logger\LogDataInterface;
 use Library\Log\Logger\Service\ServiceLogData;
 
 class MigrationLogger extends AbstractLogger implements MigrationLoggerInterface
