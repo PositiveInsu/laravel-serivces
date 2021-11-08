@@ -2,6 +2,7 @@
 
 namespace Library\Log\Logger;
 
+use DateTimeZone;
 use Library\Exception\ExceptionServiceInterface;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\StreamHandler;
@@ -12,6 +13,7 @@ abstract class AbstractLogger implements LoggerInterface
     protected string $delimiter;
     protected string $format;
     protected string $dateFormat;
+    protected string $timezone;
     protected Logger $logger;
     protected Logger $traceLogger;
 
@@ -21,6 +23,7 @@ abstract class AbstractLogger implements LoggerInterface
         $this->delimiter = config('custom_log.delimiter');
         $this->format = config('custom_log.formatter_format');
         $this->dateFormat = config('custom_log.date_format');
+        $this->timezone = config('custom_log.timezone');
         $this->initLogger( $this->getLogFileName());
     }
 
@@ -65,10 +68,12 @@ abstract class AbstractLogger implements LoggerInterface
     private function initLogger(string $loggerName)
     {
         $logger = new Logger($loggerName);
+        $logger->setTimezone(new DateTimeZone($this->timezone));
         $logger->pushHandler($this->setFormatter(new StreamHandler($this->getLogPath($loggerName).$loggerName.'.log', Logger::INFO)));
         $this->logger = $logger;
 
         $traceLogger = new Logger($loggerName);
+        $traceLogger->setTimezone(new DateTimeZone($this->timezone));
         $traceLogger->pushHandler($this->setFormatter(new StreamHandler($this->getLogPath($loggerName).$loggerName.'_error_trace.log', Logger::ERROR)));
         $this->traceLogger = $traceLogger;
     }
