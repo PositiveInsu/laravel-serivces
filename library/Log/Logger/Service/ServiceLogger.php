@@ -2,7 +2,6 @@
 
 namespace Library\Log\Logger\Service;
 
-
 use Library\Log\Logger\AbstractLogger;
 use Library\Log\Logger\LogDataInterface;
 
@@ -20,7 +19,7 @@ class ServiceLogger extends AbstractLogger implements ServiceLoggerInterface
         }
     }
 
-    protected function getMessageFrom(LogDataInterface $logData): string
+    protected function getLogMessageFrom(LogDataInterface $logData): string
     {
         $logData = $this->castType($logData);
         return $logData->getContextId().$this->delimiter.
@@ -29,7 +28,7 @@ class ServiceLogger extends AbstractLogger implements ServiceLoggerInterface
             $logData->getMessage();
     }
 
-    protected function getTraceMessageFrom(LogDataInterface $logData): string
+    protected function getTraceLogMessageFrom(LogDataInterface $logData): string
     {
         $logData = $this->castType($logData);
         return $logData->getContextId().$this->delimiter.

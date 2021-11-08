@@ -19,7 +19,7 @@ class MigrationLogger extends AbstractLogger implements MigrationLoggerInterface
             $this->exceptionService->invalidArgument(ServiceLogData::class, $logData::class);
         }
     }
-    protected function getMessageFrom(LogDataInterface $logData): string
+    protected function getLogMessageFrom(LogDataInterface $logData): string
     {
         $logData = $this->castType($logData);
         return $logData->getContextId().$this->delimiter.
@@ -28,7 +28,7 @@ class MigrationLogger extends AbstractLogger implements MigrationLoggerInterface
             $logData->getMessage();
     }
 
-    protected function getTraceMessageFrom(LogDataInterface $logData): string
+    protected function getTraceLogMessageFrom(LogDataInterface $logData): string
     {
         $logData = $this->castType($logData);
         return $logData->getContextId().$this->delimiter.

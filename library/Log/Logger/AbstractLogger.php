@@ -17,7 +17,6 @@ abstract class AbstractLogger implements LoggerInterface
 
     public function __construct(
         protected ExceptionServiceInterface $exceptionService,
-        protected LoggerStatusInterface $loggerStatus
     ){
         $this->delimiter = config('custom_log.delimiter');
         $this->format = config('custom_log.formatter_format');
@@ -27,38 +26,29 @@ abstract class AbstractLogger implements LoggerInterface
 
     public function INFO(LogDataInterface $logData): void
     {
-        if( $this->loggerStatus->getINFOStatus()){
-            $this->checkLogDataType($logData);
-            $logMessage = $this->getMessageFrom($logData);
-            $this->logger->info($logMessage);
-            $this->logger->reset();
-        }
+        $this->checkLogDataType($logData);
+        $logMessage = $this->getLogMessageFrom($logData);
+        $this->logger->info($logMessage);
+        $this->logger->reset();
     }
 
     public function ERROR(LogDataInterface $logData): void
     {
-        if( $this->loggerStatus->getERRORStatus()){
-            $this->checkLogDataType($logData);
-            $this->logError($logData);
-            $this->logTrace($logData);
-        }
-    }
-
-    public function getLoggerStatus(): LoggerStatusInterface
-    {
-        return $this->loggerStatus;
+        $this->checkLogDataType($logData);
+        $this->logError($logData);
+        $this->logTrace($logData);
     }
 
     private function logError(LogDataInterface $logData)
     {
-        $logMessage = $this->getMessageFrom($logData);
+        $logMessage = $this->getLogMessageFrom($logData);
         $this->logger->error($logMessage);
         $this->logger->reset();
     }
 
     private function logTrace(LogDataInterface $logData)
     {
-        $traceMessage = $this->getTraceMessageFrom($logData);
+        $traceMessage = $this->getTraceLogMessageFrom($logData);
         $this->traceLogger->error($traceMessage);
         $this->traceLogger->reset();
     }
@@ -69,14 +59,13 @@ abstract class AbstractLogger implements LoggerInterface
      */
     public abstract function getLogFileName(): string;
     protected abstract function checkLogDataType(LogDataInterface $logData): void;
-    protected abstract function getMessageFrom(LogDataInterface $logData): string;
-    protected abstract function getTraceMessageFrom(LogDataInterface $logData): string;
+    protected abstract function getLogMessageFrom(LogDataInterface $logData): string;
+    protected abstract function getTraceLogMessageFrom(LogDataInterface $logData): string;
 
     private function initLogger(string $loggerName)
     {
         $logger = new Logger($loggerName);
         $logger->pushHandler($this->setFormatter(new StreamHandler($this->getLogPath($loggerName).$loggerName.'.log', Logger::INFO)));
-        $logger->pushHandler($this->setFormatter(new StreamHandler($this->getLogPath($loggerName).$loggerName.'_error.log', Logger::ERROR)));
         $this->logger = $logger;
 
         $traceLogger = new Logger($loggerName);
